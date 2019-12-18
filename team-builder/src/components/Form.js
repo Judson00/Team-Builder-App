@@ -3,45 +3,52 @@ import { useState } from 'react';
 
 const Form = () => {
 
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [user, setUser] = useState({ name: '', email: '', role: '' });
 
   const handleUserNameChange = event => {
-    setUserName(event.target.value);
+    setUser({ ...user, name: event.target.value });
   }
   const handleEmailChange = event => {
-    setEmail(event.target.value);
+    setUser({ ...user, email: event.target.value });
   }
   const handleRoleChange = event => {
-    setRole(event.target.value);
+    setUser({ ...user, role: event.target.value });
   }
 
   const submitHandler = event => {
-    console.log('userName');
-    console.log('email');
-    console.log('role');
+    console.log('user.name');
+    console.log('user.email');
+    console.log('user.role');
     event.preventDefault();
   };
 
   return (
 
     <div>
-      {console.log({ userName })}
-      {console.log({ email })}
-      {console.log({ role })}
+      {console.log(user)}
       <form onSubmit={event => submitHandler(event)}>
         <label>
           Full Name:
-          <input type='text'placeholder='e.g. John Doe' onChange={event => handleUserNameChange(event)} />
+          <input 
+            type='text'
+            placeholder='e.g. John Doe' 
+            onChange={event => handleUserNameChange(event)} 
+          />
         </label>
         <label>
           Email: 
-          <input type='text' placeholder='e.g. john.doe@gmail.com' onChange={event => handleEmailChange(event)}/>
+          <input type='text' 
+            placeholder='e.g. john.doe@gmail.com' 
+            onChange={event => handleEmailChange(event)}
+          />
         </label>
         <label>
           Role:
-          <input type='text' placeholder='e.g. Front-End Engineer' onChange={event => handleRoleChange(event)} />
+          <input 
+            type='text' 
+            placeholder='e.g. Front-End Engineer' 
+            onChange={event => handleRoleChange(event)} 
+          />
         </label>
         <button>Submit</button>
       </form>
