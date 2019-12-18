@@ -13,7 +13,7 @@ const Form = () => {
     console.log('user.name');
     console.log('user.email');
     console.log('user.role');
-    //setUser({ username: '', email: '', role: '' })
+    setUser({ username: '', email: '', role: '' })
     event.preventDefault();
   };
 
@@ -54,7 +54,6 @@ const Form = () => {
         </label><br />
         <button>Submit</button>
       </form>
-
       <p>{user.username} {user.email} {user.role}</p>
     </div>
   )
