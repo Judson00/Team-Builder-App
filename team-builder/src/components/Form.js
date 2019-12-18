@@ -5,20 +5,15 @@ const Form = () => {
 
   const [user, setUser] = useState({ name: '', email: '', role: '' });
 
-  const handleUserNameChange = event => {
-    setUser({ ...user, name: event.target.value });
-  }
-  const handleEmailChange = event => {
-    setUser({ ...user, email: event.target.value });
-  }
-  const handleRoleChange = event => {
-    setUser({ ...user, role: event.target.value });
+  const handleChange = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
   }
 
   const submitHandler = event => {
     console.log('user.name');
     console.log('user.email');
     console.log('user.role');
+    setUser({ name: '', email: '', role: '' })
     event.preventDefault();
   };
 
@@ -32,14 +27,19 @@ const Form = () => {
           <input 
             type='text'
             placeholder='e.g. John Doe' 
-            onChange={event => handleUserNameChange(event)} 
+            name='username'
+            value={user.name}
+            onChange={event => handleChange(event)} 
           />
         </label>
         <label>
           Email: 
-          <input type='text' 
+          <input 
+            type='text' 
             placeholder='e.g. john.doe@gmail.com' 
-            onChange={event => handleEmailChange(event)}
+            name='email'
+            value={user.email}
+            onChange={event => handleChange(event)}
           />
         </label>
         <label>
@@ -47,7 +47,9 @@ const Form = () => {
           <input 
             type='text' 
             placeholder='e.g. Front-End Engineer' 
-            onChange={event => handleRoleChange(event)} 
+            name='role'
+            value={user.role}
+            onChange={event => handleChange(event)} 
           />
         </label>
         <button>Submit</button>
