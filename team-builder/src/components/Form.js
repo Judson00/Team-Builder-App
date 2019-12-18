@@ -1,27 +1,33 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const Form = () => {
+const Form = props => {
 
-  const [user, setUser] = useState({ username: '', email: '', role: '' });
+  const [user, setUser] = useState({ 
+    username: '', 
+    email: '', 
+    role: '' 
+  });
 
   const handleChange = event => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setUser({ 
+      ...user, 
+      [event.target.name]: event.target.value 
+    });
+    console.log(event.target.name);
   }
 
   const submitHandler = event => {
     console.log('user.name');
     console.log('user.email');
     console.log('user.role');
-    setUser({ username: '', email: '', role: '' })
     event.preventDefault();
+    props.addNewInfo(user);
+    setUser({ username: '', email: '', role: '' })
+    
   };
 
   return (
-
-    <div>
-      {console.log(user)}
-      <form onSubmit={event => submitHandler(event)}>
+      <form onSubmit={submitHandler}>
         <label>
           Full Name:
           <input 
@@ -29,7 +35,7 @@ const Form = () => {
             placeholder='e.g. John Doe' 
             name='username'
             value={user.username}
-            onChange={event => handleChange(event)} 
+            onChange={handleChange} 
           />
         </label><br />
         <label>
@@ -39,7 +45,7 @@ const Form = () => {
             placeholder='e.g. john.doe@gmail.com' 
             name='email'
             value={user.email}
-            onChange={event => handleChange(event)}
+            onChange={handleChange}
           />
         </label><br />
         <label>
@@ -49,13 +55,11 @@ const Form = () => {
             placeholder='e.g. Front-End Engineer' 
             name='role'
             value={user.role}
-            onChange={event => handleChange(event)} 
+            onChange={handleChange} 
           />
         </label><br />
-        <button>Submit</button>
+        <button type='submit'>Add Team Member</button>
       </form>
-      <p>{user.username} {user.email} {user.role}</p>
-    </div>
   )
 
 }
