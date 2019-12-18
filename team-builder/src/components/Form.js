@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const Form = () => {
 
-  const [user, setUser] = useState({ name: '', email: '', role: '' });
+  const [user, setUser] = useState({ username: '', email: '', role: '' });
 
   const handleChange = event => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -13,7 +13,7 @@ const Form = () => {
     console.log('user.name');
     console.log('user.email');
     console.log('user.role');
-    setUser({ name: '', email: '', role: '' })
+    //setUser({ username: '', email: '', role: '' })
     event.preventDefault();
   };
 
@@ -28,10 +28,10 @@ const Form = () => {
             type='text'
             placeholder='e.g. John Doe' 
             name='username'
-            value={user.name}
+            value={user.username}
             onChange={event => handleChange(event)} 
           />
-        </label>
+        </label><br />
         <label>
           Email: 
           <input 
@@ -41,7 +41,7 @@ const Form = () => {
             value={user.email}
             onChange={event => handleChange(event)}
           />
-        </label>
+        </label><br />
         <label>
           Role:
           <input 
@@ -51,9 +51,11 @@ const Form = () => {
             value={user.role}
             onChange={event => handleChange(event)} 
           />
-        </label>
+        </label><br />
         <button>Submit</button>
       </form>
+
+      <p>{user.username} {user.email} {user.role}</p>
     </div>
   )
 
