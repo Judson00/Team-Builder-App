@@ -1,23 +1,33 @@
 import React from 'react';
 
-const UserTable = () => (
+const UserTable = props => (
   <table>
     <thead>
       <tr>
         <th>Name</th>
-        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+      {props.users.length > 0 ? (
+        props.users.map(user => (
       <tr>
-        <td>Name Data</td>
-        <td>Username data</td>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>{user.role}</td>
         <td>
           <button className='button muted-button'>Edit</button>
           <button className='button muted-button'>Delete</button>
         </td>
       </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={3}>No Users</td>
+        </tr>
+      )}
     </tbody>
   </table>
 )
