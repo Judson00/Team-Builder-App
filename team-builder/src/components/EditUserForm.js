@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AddUserForm = props => {
+const EditUserForm = props => {
 
-  const initialFormState = { id: null, name: '', email: '', role: '' }
-  const [user, setUser] = useState(initialFormState)
+  useEffect(() => {
+    setUser(props.currentUser)
+  }, [props])
+
+  const [user, setUser] = useState(props.currentUser)
 
   const handleInputChange = event => {
     const { name, value } = event.target
 
-    setUser({...user, [name]: value})
+    setUser({ ...user, [name]: value })
   }
 
   return(
     <form
-      onSubmit={event => {
+      onSubmit = {event => {
         event.preventDefault()
-        if (!user.name || !user.email || !user.role) return
-        props.addUser(user)
-        setUser(initialFormState)
+
+        props.updateUser(user.id, user)
       }}
     >
       <label>Name</label>
@@ -26,9 +28,12 @@ const AddUserForm = props => {
       <input type='email' name='email' value={user.email} onChange={handleInputChange} />
       <label>Role</label>
       <input type='text' name='role' value={user.role} onChange={handleInputChange} />
-      <button>Add New Team Member</button> 
+      <button>Update User</button>
+      <button onClick = {() => props.setEditing(false)} className='button muted-button'>
+        Cancel
+      </button>
     </form>
   )
 }
 
-export default AddUserForm;
+export default EditUserForm;
